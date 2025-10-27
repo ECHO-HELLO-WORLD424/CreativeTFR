@@ -1,5 +1,6 @@
 .deprecated
 public/data
+*.zip
 
 # Logs
 logs
