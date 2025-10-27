@@ -97,6 +97,12 @@ Deploy the `dist/` folder to any static hosting service:
 - **Apache**: Configure virtual host to serve the `dist/` directory
 - **Static Hosts**: Upload `dist/` to Netlify, Vercel, GitHub Pages, etc.
 
+Or: you can deploy via http server and do a reverse proxy with nginx:
+```bash
+npx http-server dist -p 8080
+```
+Then add reverse proxy configuration to nginx
+
 #### Example Nginx Configuration
 
 ```nginx
