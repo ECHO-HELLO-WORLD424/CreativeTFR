@@ -1,63 +1,131 @@
-## CreativeTFR
+# CreativeTFR
 
-有人说 要有我们 TFR 自己的 TNOCreator
+A community-driven UI recreation tool for TFR game. Built with Vue3 as a serverless, frontend-only application with IndexedDB for local storage.
 
-于是 HittyGubby 就创造了 CreativeTFR
+[中文文档](./README.zh.md)
 
-（我才不承认是因为TNOC做的依托，而且加个Creator在后面比较奇怪所以提前了）
+## Features
 
-基于Vue3，无服务端，纯前端应用，数据存储于IndexedDB
+- Vue3-based modern frontend application
+- Serverless architecture - runs entirely in the browser
+- Local data persistence using IndexedDB
+- HTML formatting support in text inputs
+- Image management system for game assets
 
-### 安装
+## Prerequisites
 
-0. git clone 仓库
+- Node.js (v16 or higher) or Bun
+- npm, yarn, or bun package manager
 
-1. 安装 npm(bun), vite
+## Installation
 
-2. npm 安装依赖：`npm install`
+### 1. Clone the Repository
 
-3. 编译：`npm run build`
+```bash
+git clone <repository-url>
+cd CreativeTFR
+```
 
-4. 下载TFR素材[数据库](http://997779.xyz/share/TFRdata.zip) **(解压后1.5GB)**
+### 2. Install Dependencies
 
-5. 将其解压到dist/data文件夹
+```bash
+npm install
+```
 
-6. 配置Apache httpd/Nginx 运行静态网站
+### 3. Download Game Assets
 
-### **注意了...**
+Download the TFR asset database: [TFRdata.zip](http://997779.xyz/share/TFRdata.zip) (1.5GB after extraction)
 
-0. 理论上这个项目已经做完了但是后续可能会交给GPT优化（
+### 4. Extract Assets
 
-1. 输入框可以输入HTML格式文本
+Extract the downloaded ZIP file to both directories:
 
-2. 因为抛弃了服务端（vps一个TNO就要炸了 再来个TFR吃不消） 所以不支持用户功能和多设备云同步
+```bash
+# Extract to public directory (for development)
+unzip TFRdata.zip -d public/data
 
-## CreativeTFR
+# If files are nested, move them to correct location:
+# The structure should be: public/data/index.json, public/data/ideology/, etc.
+```
 
-Yet another showcase gen, but finally deprecating gagging CommonJS, and used Vue3 for _coding experience_
+## Development
 
-### Installation
+Start the development server:
 
-0. clone this repo
+```bash
+npm run dev
+```
 
-1. install any net package manager and vite
+The application will be available at `http://localhost:5173` (or another port if 5173 is occupied).
 
-2. install dependencies `npm install`
+## Production Build
 
-3. compile `npm run build`
+### Build the Application
 
-4. download TFR [Database](http://997779.xyz/share/TFRdata.zip) **(1.5GB after unzipping)**
+```bash
+npm run build
+```
 
-5. decompress to dist/data
+This creates an optimized production build in the `dist/` directory.
 
-6. configure your Apache httpd/Nginx and serve static site
+### Preview Production Build Locally
 
-### **Important**
+```bash
+npm run preview
+```
 
-0. Technically this project has been completed, but maybe debloating in future using random chatbot...
+### Deploy to Production
 
-1. Raw Html format text is supported in input boxes
+Deploy the `dist/` folder to any static hosting service:
 
-2. Per-user functionalities and cloud sync is not supported since using serverless mode (vps's gonna get fucked up, wtf is disk compression)
+- **Nginx**: Point document root to the `dist/` directory
+- **Apache**: Configure virtual host to serve the `dist/` directory
+- **Static Hosts**: Upload `dist/` to Netlify, Vercel, GitHub Pages, etc.
 
-**OK. NO MORE CRAP.**
+#### Example Nginx Configuration
+
+```nginx
+server {
+    listen 80;
+    server_name yourdomain.com;
+    root /path/to/CreativeTFR/dist;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+}
+```
+
+## Important Notes
+
+- **Data Storage**: All user data is stored locally in the browser's IndexedDB. No cloud sync or multi-device support.
+- **HTML Support**: Input fields support raw HTML formatting.
+- **Asset Structure**: Game assets must be in `public/data/` for development and will be copied to `dist/data/` during build.
+
+## Project Structure
+
+```
+CreativeTFR/
+├── public/           # Static assets (served at root URL)
+│   └── data/        # Game assets (images, index.json)
+├── src/             # Vue3 source code
+├── dist/            # Production build output
+└── package.json     # Project dependencies
+```
+
+## Troubleshooting
+
+**Images not loading in development?**
+- Ensure assets are extracted to `public/data/`
+- Check that `public/data/index.json` exists
+- Restart the dev server after adding assets
+
+**Images not loading in production?**
+- Verify `dist/data/` directory exists after build
+- Check web server configuration serves static files correctly
+- Ensure the build process completed successfully
+
+## License
+
+Community project for TFR game.
