@@ -124,6 +124,27 @@ server {
 - **HTML Support**: Input fields support raw HTML formatting.
 - **Asset Structure**: Game assets must be in `public/data/` for development and will be copied to `dist/data/` during build.
 
+## Custom Image Requirements
+
+The application supports uploading custom images for various elements. For best results, use the following dimensions:
+
+| Image Type | Recommended Size | Format | Notes |
+|------------|-----------------|--------|-------|
+| **Ideology** | 66 x 68 px | PNG with transparency | Icon for political ideology |
+| **Leader** | 156 x 210 px | PNG | Portrait image |
+| **Flag** | 82 x 52 px | PNG with transparency | National flag icon |
+| **Faction** | 60 x 60 px | PNG with transparency | Alliance/faction icon |
+| **Focus** | 90 x 93 px | PNG with transparency | National focus tree icon |
+| **Event** | 500 x 250 px | PNG | Event picture (2:1 ratio) |
+| **News** | 400 x 150 px | PNG | News article image |
+| **Super Event** | 982 x 594 px | PNG | Large dramatic event image |
+
+**Tips for Custom Images:**
+- Use PNG format for transparency support
+- Match the recommended dimensions for best visual quality
+- Images are resizable in the editor for some types (ideology, faction, focus, event)
+- Keep file sizes reasonable for browser performance
+
 ## Project Structure
 
 ```
