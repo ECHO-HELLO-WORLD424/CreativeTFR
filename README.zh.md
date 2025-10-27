@@ -38,14 +38,29 @@ npm install
 
 ### 4. 解压素材文件
 
-将下载的 ZIP 文件解压到指定目录：
+ZIP 文件包含嵌套目录结构，需要解压并修正路径：
 
 ```bash
-# 解压到 public 目录（用于开发环境）
-unzip TFRdata.zip -d public/data
+# 先解压到临时位置
+unzip TFRdata.zip
 
-# 如果文件结构有嵌套，需要移动到正确位置：
-# 正确的结构应该是：public/data/index.json, public/data/ideology/ 等
+# 移动文件到开发环境的正确位置
+# 注意：ZIP 文件解压后的结构是 root/CreativeTFR/data/*
+cp -r root/CreativeTFR/data/* public/data/
+rm -rf root
+
+# 验证目录结构是否正确
+ls public/data/
+# 应该显示：index.json, ideology/, event/, flag/, focus/, leader/, news/ 等
+
+# 同时复制到 dist 目录用于生产环境（如果已经构建过）
+cp -r public/data dist/
+```
+
+**一键执行方式：**
+
+```bash
+unzip TFRdata.zip && cp -r root/CreativeTFR/data/* public/data/ && rm -rf root && cp -r public/data dist/
 ```
 
 ## 开发环境

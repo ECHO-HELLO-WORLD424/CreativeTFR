@@ -38,14 +38,29 @@ Download the TFR asset database: [TFRdata.zip](http://997779.xyz/share/TFRdata.z
 
 ### 4. Extract Assets
 
-Extract the downloaded ZIP file to both directories:
+The ZIP file contains nested directories. Extract and fix the structure:
 
 ```bash
-# Extract to public directory (for development)
-unzip TFRdata.zip -d public/data
+# Extract to a temporary location first
+unzip TFRdata.zip
 
-# If files are nested, move them to correct location:
-# The structure should be: public/data/index.json, public/data/ideology/, etc.
+# Move files to correct location for development
+# Note: The ZIP creates root/CreativeTFR/data/* structure
+cp -r root/CreativeTFR/data/* public/data/
+rm -rf root
+
+# Verify the structure is correct
+ls public/data/
+# Should show: index.json, ideology/, event/, flag/, focus/, leader/, news/, etc.
+
+# Also copy to dist for production (if you've already built)
+cp -r public/data dist/
+```
+
+**Alternative one-liner approach:**
+
+```bash
+unzip TFRdata.zip && cp -r root/CreativeTFR/data/* public/data/ && rm -rf root && cp -r public/data dist/
 ```
 
 ## Development
