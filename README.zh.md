@@ -63,6 +63,25 @@ cp -r public/data dist/
 unzip TFRdata.zip && cp -r root/CreativeTFR/data/* public/data/ && rm -rf root && cp -r public/data dist/
 ```
 
+### 5. 设置国家精神图片
+
+国家精神管理器需要将图片放置在 `public/data/spirit/` 目录。复制预设图片并重新生成索引：
+
+```bash
+# 创建 spirit 目录
+mkdir -p public/data/spirit
+
+# 从 preset 复制国家精神图片
+cp public/preset/*.png public/data/spirit/
+
+# 重新生成 index.json 以包含国家精神图片
+cd public/data
+python3 ftojson.py
+cd ../..
+```
+
+这样可以确保国家精神管理器对话框中正确显示内置图片。
+
 ## 开发环境
 
 启动开发服务器：
@@ -156,6 +175,11 @@ CreativeTFR/
 - 确保素材已解压到 `public/data/`
 - 检查 `public/data/index.json` 是否存在
 - 添加素材后重启开发服务器
+
+**国家精神管理器中图片无法显示？**
+- 运行设置命令：`mkdir -p public/data/spirit && cp public/preset/*.png public/data/spirit/`
+- 重新生成索引：`cd public/data && python3 ftojson.py && cd ../..`
+- 检查 `public/data/spirit/` 目录是否包含 PNG 文件
 
 **生产环境中图片无法加载？**
 - 验证构建后 `dist/data/` 目录是否存在
