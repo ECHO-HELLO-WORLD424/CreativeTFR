@@ -63,25 +63,6 @@ cp -r public/data dist/
 unzip TFRdata.zip && cp -r root/CreativeTFR/data/* public/data/ && rm -rf root && cp -r public/data dist/
 ```
 
-### 5. Setup Spirit Images
-
-The Spirit Manager (国家精神管理) requires spirit images to be in the `public/data/spirit/` directory. Copy preset images and regenerate the index:
-
-```bash
-# Create spirit directory
-mkdir -p public/data/spirit
-
-# Copy spirit images from preset
-cp public/preset/*.png public/data/spirit/
-
-# Regenerate index.json to include spirit images
-cd public/data
-python3 ftojson.py
-cd ../..
-```
-
-This ensures the built-in spirit images appear correctly in the Spirit Manager dialog.
-
 ## Development
 
 Start the development server:
@@ -181,11 +162,6 @@ CreativeTFR/
 - Ensure assets are extracted to `public/data/`
 - Check that `public/data/index.json` exists
 - Restart the dev server after adding assets
-
-**Spirit images not appearing in Spirit Manager?**
-- Run the setup command: `mkdir -p public/data/spirit && cp public/preset/*.png public/data/spirit/`
-- Regenerate index: `cd public/data && python3 ftojson.py && cd ../..`
-- Check that `public/data/spirit/` directory contains PNG files
 
 **Images not loading in production?**
 - Verify `dist/data/` directory exists after build
